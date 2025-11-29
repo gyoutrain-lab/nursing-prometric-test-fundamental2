@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nursing Prometric — Landing & Dashboard</title>
+
+  <!-- Social / thumbnail (use the raw GitHub image as the share image) -->
+  <meta property="og:title" content="Nursing Prometric — Simulation Test" />
+  <meta property="og:description" content="Secure prometric-style quiz gateway and dashboard." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/gyoutrain-lab/nursing-prometric-test-fundamental2/main/assets/icon17%20(7).jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="https://raw.githubusercontent.com/gyoutrain-lab/nursing-prometric-test-fundamental2/main/assets/icon17%20(7).jpg" />
+
+  <style>
+    :root{--accent:#007b83}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+
+    /* page layout */
+    .hero{
+      height:55vh;
+      min-height:320px;
+      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+      background-image: url('https://raw.githubusercontent.com/gyoutrain-lab/nursing-prometric-test-fundamental2/main/assets/icon17%20(7).jpg');
+      background-position:center top; background-size:cover;
+    }
+    .hero::after{
+      content:'';position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+    }
+    .hero .title{
+      position:relative;color:#fff;text-align:center;padding:16px;z-index:2;
+      backdrop-filter: blur(3px);
+      border-radius:12px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+    }
+    .title h1{margin:0;font-size:clamp(20px,4vw,40px)}
+    .title p{margin:6px 0 0;font-size:clamp(12px,1.6vw,18px);opacity:.95}
+
+    /* dashboard area */
+    .dashboard-wrap{position:relative;padding:30px 16px 70px;background:#f7f9fa;min-height:45vh}
+
+    /* backgrounded transparent image with flowing animation */
+    .water-bg{
+      position:absolute;inset:0;pointer-events:none;z-index:0;background-repeat:repeat-x;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.0)),
+        url('https://raw.githubusercontent.com/gyoutrain-lab/nursing-prometric-test-fundamental2/main/assets/icon17%20(7).jpg');
+      background-size: 140% auto, cover;
+      opacity:.18;mix-blend-mode:normal;filter:grayscale(.2) contrast(.95);
+      animation: flow 12s linear infinite;
+      transform-origin:center;
+    }
+    @keyframes flow{
+      0%{background-position:0 0, center top}
+      100%{background-position:-1200px 0, center top}
+    }
+
+    .dashboard-card{position:relative;z-index:2;max-width:1100px;margin:0 auto;background:rgba(255,255,255,0.9);border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(10,20,30,0.08)}
+
+    .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(0,0,0,0.08)}
+    .note{font-size:13px;color:#333;opacity:.9}
+
+    .appsFrame{width:100%;height:640px;border:0;border-radius:10px;background:#fff;display:block}
+
+    footer{padding:18px;text-align:center;color:#666;font-size:13px}
+
+    /* responsive */
+    @media (max-width:700px){.appsFrame{height:520px}}
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="title">
+      <h1>Nursing Prometric — Simulation Gateway</h1>
+      <p>Secure dashboard — click to load the internal quiz dashboard (Google Apps Script).</p>
+    </div>
+  </section>
+
+  <main class="dashboard-wrap">
+    <div class="water-bg" aria-hidden="true"></div>
+
+    <div class="dashboard-card">
+      <div class="controls">
+        <button id="loadBtn" class="btn">Load Dashboard</button>
+        <button id="openBtn" class="btn ghost">Open Dashboard in new tab</button>
+        <div style="flex:1"></div>
+        <div class="note">If the widget appears blank, you may need to sign in to Google or allow embedding in the Apps Script (see instructions below).</div>
+      </div>
+
+      <!-- placeholder iframe; src is set only when the user clicks Load Dashboard to avoid accidental preloads -->
+      <iframe id="appsIframe" class="appsFrame" title="Prometric Dashboard" sandbox="allow-forms allow-scripts allow-same-origin" src="about:blank"></iframe>
+
+      <div style="margin-top:12px;font-size:13px;color:#444">
+        <strong>Important:</strong> The dashboard is served from a Google Apps Script endpoint and will keep working unchanged if you do not alter the script's URL.
+      </div>
+
+      <pre id="debug" style="display:none;white-space:pre-wrap;margin-top:12px;background:#f1f6f9;padding:10px;border-radius:8px;font-size:12px;color:#334"></pre>
+    </div>
+  </main>
+
+  <footer>© Nursing Prometric — Hosted via GitHub Pages. Thumbnail/icon comes from repository assets.</footer>
+
+  <script>
+    // --- CONFIG: paste your provided Apps Script exec URL here ---
+    const GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbwUSzMR2d0y_Gy1EPdc3vqrQoH0uuynO0264kW1l5bWDo2uma8PiLLiE5t7_RgU94mV/exec';
+
+    const loadBtn = document.getElementById('loadBtn');
+    const openBtn = document.getElementById('openBtn');
+    const iframe = document.getElementById('appsIframe');
+    const debug = document.getElementById('debug');
+
+    // set iframe src only on demand (prevents automatic requests that could cause login redirects or CORS issues)
+    loadBtn.addEventListener('click', function(){
+      iframe.src = GAS_EXEC_URL;
+      loadBtn.disabled = true; loadBtn.textContent = 'Dashboard loaded';
+      checkAuthAndFrame();
+    });
+
+    // open fallback in new tab
+    openBtn.addEventListener('click', function(){ window.open(GAS_EXEC_URL, '_blank'); });
+
+    // Attempts to detect whether Google redirected the iframe to a login page (common when user not authed)
+    function checkAuthAndFrame(){
+      // poll a few times — if iframe.contentWindow.length becomes truthy, it's most likely loaded ok.
+      let attempts = 0;
+      const max = 20;
+      const interval = setInterval(function(){
+        attempts++;
+        try{
+          // many Google Apps Script wrappers expose a nested iframe; contentWindow.length can indicate success
+          if (iframe.contentWindow && iframe.contentWindow.length){
+            debug.style.display='block';
+            debug.textContent = 'Dashboard loaded inside iframe.';
+            clearInterval(interval);
+            return;
+          }
+        }catch(e){
+          // accessing cross-origin may throw; that's expected if apps script is wrapped differently
+          debug.style.display='block';
+          debug.textContent = 'Notice: iframe is cross-origin or blocked by browser; use "Open Dashboard in new tab" as fallback.';
+          clearInterval(interval);
+          return;
+        }
+        if (attempts >= max){
+          debug.style.display='block';
+          debug.textContent = 'If the frame stays blank, you might need to: sign in to Google / enable XFrameOptionsMode(ALLOWALL) in the Apps Script / use the button to open in new tab.';
+          clearInterval(interval);
+        }
+      }, 400);
+    }
+  </script>
+
+  <!--
+    Deployment notes (keep inside repo as README.md or comments):
+    1) Put this file at the repo root (index.html) and enable GitHub Pages (branch: main, /root).
+    2) Social media thumbnails use the raw image URL set in og:image.
+    3) To allow embedding inside this page without the 'grey box' login issue, set in your Apps Script server code:
+
+       function doGet(e){
+         const output = HtmlService.createHtmlOutputFromFile('index');
+         output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+         return output;
+       }
+
+       Note: ALLOWALL disables the X-Frame-Options header — take appropriate precautions against clickjacking.
+
+    4) If embedding is still blocked for some users, the 'Open Dashboard in new tab' button is the reliable fallback.
+  -->
+
+</body>
+</html>
