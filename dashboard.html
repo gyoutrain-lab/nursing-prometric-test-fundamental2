@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nursing Prometric – Quiz Dashboard</title>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .header {
+    width: 100%;
+    padding: 12px;
+    background: #0369a1;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .frame-container {
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100 - 60px);
+    margin-top: 60px;
+    overflow: hidden;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
+
+<script>
+function updateVH() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', updateVH);
+window.addEventListener('orientationchange', updateVH);
+updateVH();
+</script>
+
+</head>
+<body>
+
+<div class="header">
+  Nursing Prometric Simulation – Dashboard
+</div>
+
+<div class="frame-container">
+  <iframe src="https://script.google.com/macros/s/AKfycbwUSzMR2d0y_Gy1EPdc3vqrQoH0uuynO0264kW1l5bWDo2uma8PiLLiE5t7_RgU94mV/exec"
+          allowfullscreen loading="lazy">
+  </iframe>
+</div>
+
+</body>
+</html>
