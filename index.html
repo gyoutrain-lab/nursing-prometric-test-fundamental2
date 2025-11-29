@@ -19,7 +19,6 @@
     overflow-x: hidden;
   }
 
-  /* Full background with soft water-flow animation */
   .water-bg {
     position: fixed;
     top: 0; left: 0;
@@ -40,7 +39,6 @@
     100% { transform: scale(1.10) translateY(-25px); }
   }
 
-  /* Center card content */
   .container {
     text-align: center;
     margin-top: 20px;
@@ -71,6 +69,43 @@
     background-color: #0284c7;
     transform: scale(1.05);
   }
+
+  /* Social links */
+  .social-icons {
+    margin-top: 25px;
+  }
+
+  .social-icons a img {
+    width: 42px;
+    height: 42px;
+    margin: 0 10px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    transition: transform 0.2s;
+  }
+
+  .social-icons a img:hover {
+    transform: scale(1.18);
+  }
+
+  /* iframe wide container */
+  .iframe-box {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 1100px;
+    height: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
 </style>
 </head>
 
@@ -79,17 +114,34 @@
 <div class="water-bg"></div>
 
 <div class="container">
-  <!-- Upper half main image -->
+
+  <!-- Main Header Image -->
   <img class="main-img"
        src="https://raw.githubusercontent.com/gyoutrain-lab/nursing-prometric-test-fundamental2/main/assets/icon17%20(7).jpg"
        alt="Prometric Gateway Image">
 
   <br>
 
+  <!-- Button: open directly -->
   <button class="enter-btn"
     onclick="window.location.href='https://script.google.com/macros/s/AKfycbwUSzMR2d0y_Gy1EPdc3vqrQoH0uuynO0264kW1l5bWDo2uma8PiLLiE5t7_RgU94mV/exec';">
     ENTER DASHBOARD
   </button>
+
+  <!-- Social Icons -->
+  <div class="social-icons" role="navigation" aria-label="social links">
+    <a href="tel:+6285399652487" title="Telephone"><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="phone"></a>
+    <a href="https://wa.me/6285399652487" target="_blank" rel="noopener" title="WhatsApp"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="whatsapp"></a>
+    <a href="mailto:gyoutrain@gmail.com" target="_blank" rel="noopener" title="Email"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email"></a>
+    <a href="https://web.facebook.com/gyouskill/" target="_blank" rel="noopener" title="Facebook"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="facebook"></a>
+    <a href="https://www.instagram.com/etkyogya" target="_blank" rel="noopener" title="Instagram"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="instagram"></a>
+  </div>
+
+  <!-- Wide Iframe (Optional, but recommended for wider quiz & rationale view) -->
+  <div class="iframe-box">
+    <iframe src="https://script.google.com/macros/s/AKfycbwUSzMR2d0y_Gy1EPdc3vqrQoH0uuynO0264kW1l5bWDo2uma8PiLLiE5t7_RgU94mV/exec"></iframe>
+  </div>
+
 </div>
 
 </body>
