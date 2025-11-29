@@ -91,7 +91,7 @@
       </div>
 
       <!-- placeholder iframe; src is set only when the user clicks Load Dashboard to avoid accidental preloads -->
-      <iframe id="appsIframe" class="appsFrame" title="Prometric Dashboard" sandbox="allow-forms allow-scripts allow-same-origin" style="width:100%; height:100vh; border:0; margin:0; padding:0; display:none; position:relative; z-index:1;" src="about:blank"></iframe>
+      <!-- Removed iframe — quiz will open in full page -->
 
       <div style="margin-top:12px;font-size:13px;color:#444">
         <strong>Important:</strong> The dashboard is served from a Google Apps Script endpoint and will keep working unchanged if you do not alter the script's URL.
@@ -114,13 +114,7 @@
 
     // set iframe src only on demand (prevents automatic requests that could cause login redirects or CORS issues)
     loadBtn.addEventListener('click', function(){
-      iframe.style.display = 'block';
-      iframe.style.position = 'relative';
-      iframe.style.zIndex = '1';
-      iframe.src = GAS_EXEC_URL;
-      loadBtn.disabled = true;
-      loadBtn.textContent = 'Dashboard loaded';
-      checkAuthAndFrame();
+      window.locatio
     });
     });
     });('click', function(){
