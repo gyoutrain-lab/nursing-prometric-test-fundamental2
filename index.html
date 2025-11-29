@@ -55,7 +55,7 @@
       100%{background-position:-1200px 0, center top}
     }
 
-    .dashboard-card{position:relative;z-index:2;max-width:1100px;margin:0 auto;background:rgba(255,255,255,0.9);border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(10,20,30,0.08)}
+    .dashboard-card{display:none;}
 
     .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
     .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
@@ -91,7 +91,7 @@
       </div>
 
       <!-- placeholder iframe; src is set only when the user clicks Load Dashboard to avoid accidental preloads -->
-      <iframe id="appsIframe" class="appsFrame" title="Prometric Dashboard" sandbox="allow-forms allow-scripts allow-same-origin" src="about:blank"></iframe>
+      <iframe id="appsIframe" class="appsFrame" title="Prometric Dashboard" sandbox="allow-forms allow-scripts allow-same-origin" style="position:fixed; top:0; left:0; width:100%; height:100%; border:0; margin:0; padding:0; z-index:9999;" src="about:blank"></iframe>
 
       <div style="margin-top:12px;font-size:13px;color:#444">
         <strong>Important:</strong> The dashboard is served from a Google Apps Script endpoint and will keep working unchanged if you do not alter the script's URL.
