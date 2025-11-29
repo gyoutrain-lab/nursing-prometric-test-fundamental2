@@ -114,7 +114,8 @@
 
     // set iframe src only on demand (prevents automatic requests that could cause login redirects or CORS issues)
     loadBtn.addEventListener('click', function(){
-      window.locatio
+      window.location.href = GAS_EXEC_URL; // Directly open dashboard
+    });
     });
     });
     });('click', function(){
